@@ -6,18 +6,14 @@ import dotenv from 'dotenv';
 dotenv.config()
 
 const db = new Client({
-  host: process.env.HOST,            // dpg-...render.com
+  host: process.env.HOST,            
   database: process.env.DATABASE,
-  user: "message_yb22_user",           // message_yb22_user or your own
+  user: "message_yb22_user",           
   password: process.env.POSTGRES_PW,
   port: Number(process.env.DB_PORT || 5432),
-  ssl: { require: true, rejectUnauthorized: false }, // External URL needs SSL
-  keepAlive: true,
-  connectionTimeoutMillis: 10000
+  ssl: { require: true, rejectUnauthorized: false },
 });
 
-
-db.on("error", e => console.error("pg client error:", e));
 try {
   await db.connect();
   console.log("PG connected");
