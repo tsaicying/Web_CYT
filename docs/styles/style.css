@@ -79,5 +79,5 @@ html {
 }
 
 #contact_container{
-    height: 80vh;
+    min-height: 60vh;
 }
