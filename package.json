@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "clean": "shx rm -rf dist",
-    "prebuild": "mkdirp dist",
-    "build:html": "npx mkdirp dist && ejs views/index.ejs -o dist/index.html",
-    "build:assets": "cpy \"public/**/*\" dist --parents",
-    "build": "rimraf dist && npx mkdirp dist && npm run build:html && npm run build:assets"
+    "clean": "shx rm -rf docs",
+    "prebuild": "mkdirp docs",
+    "build:html": "npx mkdirp docs && ejs views/index.ejs -o docs/index.html",
+    "build:assets": "npx cpy \"public/**/*\" docs --parents",
+    "build": "npm run clean && npm run prebuild && npm run build:html && npm run build:assets"
   },
   "keywords": [],
   "type": "module",
@@ -24,6 +24,7 @@
     "cpy": "^11.1.0",
     "cpy-cli": "^5.0.0",
     "ejs-cli": "^2.2.3",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.0.1",
+    "shx": "^0.4.0"
   }
 }
