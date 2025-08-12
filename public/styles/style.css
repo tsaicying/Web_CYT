@@ -79,5 +79,7 @@ html {
 }
 
 #contact_container{
-    min-height: 70vh;
+    min-height: 50vh;
+    padding: 10rem;
 }
+
