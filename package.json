@@ -2,13 +2,7 @@
   "name": "copy_matt_profile",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "clean": "shx rm -rf docs",
-    "prebuild": "mkdirp docs",
-    "build:html": "npx mkdirp docs && ejs views/index.ejs -o docs/index.html",
-    "build:assets": "npx cpy \"public/**/*\" docs --parents",
-    "build": "npm run clean && npm run prebuild && npm run build:html && npm run build:assets"
-  },
+  "scripts": {},
   "keywords": [],
   "type": "module",
   "author": "",
@@ -16,6 +10,7 @@
   "description": "",
   "dependencies": {
     "bulma": "^1.0.4",
+    "dotenv": "^17.2.1",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "nodemon": "^3.1.10"
