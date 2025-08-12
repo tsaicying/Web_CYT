@@ -14,13 +14,15 @@ const db = new Client({
     database: process.env.DB_NAME,
     password: process.env.DB_PW,
     port: process.env.PORT,
-    ssl: { require: true, rejectUnauthorized: false }
+    ssl: { require: true, rejectUnauthorized: false },
+    idleTimeoutMillis: 30000
 })
 
 db.connect();
 
 app.use(express.static("public"));
-app.use(bodyParser.urlencoded({entended:true}));
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.json());
 
 app.get("/", (req, res)=> {
     res.render("index.ejs");
@@ -40,7 +42,8 @@ app.post("/contacts", async(req, res)=>{
         await db.query("INSERT INTO message (name, email, message) VALUES ($1, $2, $3)", [name, email, textarea])
         res.render("partials/submit.ejs")
     } catch(err) {
-        console.log(err)
+        console.log(err);
+        res.redirect("/");
     };
 
 })
