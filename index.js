@@ -4,7 +4,6 @@ import { Client } from "pg";
 import dotenv from 'dotenv';
 
 dotenv.config()
-console.log(process.env.HOST)
 
 const db = new Client({
     user: "message_yb22_user",
@@ -16,7 +15,7 @@ const db = new Client({
 })
 
 
-db.connect();
+await db.connect();
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -24,7 +23,9 @@ const app = express();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({entended:true}));
 
-app.get("/", (req, res)=> {
+app.get("/", async(req, res)=> {
+    const result = await db.query("SELECT * FROM message");
+    console.log(result.rows)
     res.render("index.ejs");
 })
 
@@ -36,9 +37,16 @@ app.get("/contacts", (req, res)=> {
     res.render("partials/contacts.ejs");
 })
 
-app.post("/contacts", (req, res)=>{
-    db.query("INSERT INTO message (name, email, message) VALUES ($1, $2, $3)", [req.body.name, req.body.email, req.body.textarea])
-    res.render("partials/submit.ejs");
+app.post("/contacts", async(req, res)=>{
+    try {
+        const {name, email, textarea} = req.body;
+        console.log({name, email, textarea});
+        await db.query("INSERT INTO message (name, email, message) VALUES ($1, $2, $3)", [name, email, textarea]);
+        res.render("partials/submit.ejs");
+    } catch (err) {
+        console.error("DB insert failed:", err);
+        res.redirect("/")
+    }
 })
 
 app.listen(port, ()=>{
