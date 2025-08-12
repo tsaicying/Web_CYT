@@ -1,0 +1,83 @@
+.button.is-primary.is-outlined {
+    background-color: transparent;
+    border-color: rgba(31, 29, 29, 0.803);
+    color: rgba(31, 29, 29, 0.803);}
+
+.navbar {
+    padding: 1.2rem 0;
+}
+
+.navbar a {
+    font-size: 15px;
+}
+
+.navbar-brand svg{
+    padding: 20px;
+}
+
+section{
+    line-height: 3rem;
+}
+
+
+@media screen and (min-width: 1024px) {
+    .skills{
+        margin-top: -15rem;
+    }
+    .section.is-medium {
+        padding-bottom: 20rem;
+    }
+}
+
+.is-large{
+    --bulma-icon-dimensions-large: 5rem;
+}
+
+.s-title{
+    color: darkred;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+}
+
+p {
+    line-height: normal;
+    margin-top:0rem;
+}
+
+.section.is-medium.project{
+    padding:10rem;
+}
+
+.project-img{
+    border-radius: 10px;
+}
+
+.project-img:hover{
+    opacity: 50%;
+}
+
+.project-button.button{
+    border-color:white;
+}
+
+.project-button.button:hover{
+    background-color: white;
+}
+
+a.project-button.button.is-primary.is-outlined.is-rounded {
+    position: relative;
+    top: 45%;
+}
+
+.project-img {
+    opacity: 50%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#contact_container{
+    height: 80vh;
+}
