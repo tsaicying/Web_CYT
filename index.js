@@ -6,13 +6,21 @@ import dotenv from 'dotenv';
 dotenv.config()
 
 const db = new Client({
-  host: process.env.HOST,            
-  database: process.env.DATABASE,
-  user: "message_yb22_user",           
-  password: process.env.POSTGRES_PW,
-  port: Number(process.env.DB_PORT || 5432),
+  connectionString: process.env.DATABASE_URL,   // set this in Render
   ssl: { require: true, rejectUnauthorized: false },
+  keepAlive: true,
+  connectionTimeoutMillis: 10000
 });
+
+
+// const db = new Client({
+//   host: process.env.HOST,            
+//   database: process.env.DATABASE,
+//   user: "message_yb22_user",           
+//   password: process.env.POSTGRES_PW,
+//   port: Number(process.env.DB_PORT || 5432),
+//   ssl: { require: true, rejectUnauthorized: false },
+// });
 
 try {
   await db.connect();
