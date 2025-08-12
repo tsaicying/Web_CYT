@@ -83,3 +83,7 @@ html {
     padding: 10rem;
 }
 
+#submit .columns {
+  min-height: 60vh; /* full height */
+  align-items: center; /* vertical center */
+}
