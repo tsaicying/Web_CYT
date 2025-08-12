@@ -14,7 +14,6 @@ const db = new Client({
     ssl:{require: true, rejectUnauthorized: false }
 })
 
-
 await db.connect();
 
 const port = process.env.PORT || 3000;
@@ -25,7 +24,7 @@ app.use(bodyParser.urlencoded({entended:true}));
 
 app.get("/", async(req, res)=> {
     const result = await db.query("SELECT * FROM message");
-    console.log(result.rows)
+    console.log(result.rows);
     res.render("index.ejs");
 })
 
