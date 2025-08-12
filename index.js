@@ -1,15 +1,16 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { Client } from "pg";
+import { Pool } from "pg";
 import dotenv from 'dotenv';
 
 dotenv.config()
 
-const db = new Client({
-  connectionString: process.env.DATABASE_URL,   // set this in Render
+const db = new Pool({
+  connectionString: process.env.DATABASE_URL,
   ssl: { require: true, rejectUnauthorized: false },
-  keepAlive: true,
-  connectionTimeoutMillis: 10000
+  max: 5,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 10000,
 });
 
 
