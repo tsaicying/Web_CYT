@@ -1,5 +1,22 @@
 import express from "express";
 import bodyParser from "body-parser";
+import { Client } from "pg";
+import dotenv from 'dotenv';
+
+dotenv.config()
+console.log(process.env.HOST)
+
+const db = new Client({
+    user: "message_yb22_user",
+    host: process.env.HOST,
+    database: process.env.DATABASE,
+    password: process.env.POSTGRES_PW,
+    port: process.env.PORT,
+    ssl:{require: true, rejectUnauthorized: false }
+})
+
+
+db.connect();
 
 const port = 3000;
 const app = express();
@@ -20,7 +37,8 @@ app.get("/contacts", (req, res)=> {
 })
 
 app.post("/contacts", (req, res)=>{
-    console.log(req.body);
+    db.query("INSERT INTO message (name, email, message) VALUES ($1, $2, $3)", [req.body.name, req.body.email, req.body.textarea])
+    res.render("partials/submit.ejs");
 })
 
 app.listen(port, ()=>{
