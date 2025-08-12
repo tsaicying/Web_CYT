@@ -11,14 +11,14 @@ const db = new Client({
     host: process.env.HOST,
     database: process.env.DATABASE,
     password: process.env.POSTGRES_PW,
-    port: process.env.PORT,
+    port: process.env.DB_PORT || 5432,
     ssl:{require: true, rejectUnauthorized: false }
 })
 
 
 db.connect();
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.static("public"));
